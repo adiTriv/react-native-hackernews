@@ -1,5 +1,6 @@
 import {StyleSheet, ActivityIndicator, View, Modal} from 'react-native';
 import React from 'react';
+import {theme} from '../../../../global/Theme';
 
 const FullPageLoader = ({visible, onClose}) => {
   return (
@@ -7,7 +8,10 @@ const FullPageLoader = ({visible, onClose}) => {
       <Modal transparent={true} visible={visible} onDismiss={onClose}>
         <View style={styles.loaderCont}>
           <View style={styles.loaderOuter}>
-            <ActivityIndicator size={'large'} />
+            <ActivityIndicator
+              size={'large'}
+              color={theme.colors.light.primary}
+            />
           </View>
         </View>
       </Modal>
@@ -26,11 +30,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#dde7f55e',
-    
   },
   loaderOuter: {
-    width: '30%',
-    height: '15%',
+    width: '25%',
+    height: '12%',
     borderRadius: 100,
     backgroundColor: '#fff',
     alignItems: 'center',

@@ -23,15 +23,27 @@ export const styles = StyleSheet.create({
 
   title: {
     fontSize: theme.fonts.fonSize.semiLarge,
+    color: theme.fonts.color.accent
   },
 
   storyDetails: {
-    marginTop: 20,
+    marginTop: 10,
   },
 
   desc: {
-    fontSize: theme.fonts.fonSize.small,
+    fontSize: theme.fonts.fonSize.semiRegular,
     marginBottom: 10
+  },
+
+  score: {
+    fontSize: theme.fonts.fonSize.xsmall,
+  },
+
+  commentsCont: {
+    borderTopWidth: 1,
+    borderTopColor: theme.colors.light.grey,
+    paddingTop: 8,
+    marginTop: 10, 
   },
 
   comments: {
@@ -40,6 +52,9 @@ export const styles = StyleSheet.create({
 
   authorTime: {
     ...globalStyles.flexrow,
-    justifyContent: 'space-between',
-  }
+  },
+
+  author: {
+    fontFamily: theme.fonts.family.semibold
+  },
 });

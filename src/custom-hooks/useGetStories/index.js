@@ -1,12 +1,18 @@
 import {useState, useEffect} from 'react';
 
-import {fetchTS} from '../../API/stories';
+import {fetchTopStories} from '../../API/stories';
 
 export const useGetStories = () => {
   const [topStories, setTopStories] = useState(null);
 
   useEffect(() => {
-    fetchTS(stories => setTopStories(stories));
+    const getStories = async () => {
+      const stories = await fetchTopStories();
+
+      setTopStories(stories);
+    };
+
+    getStories();
   }, []);
 
   return topStories;

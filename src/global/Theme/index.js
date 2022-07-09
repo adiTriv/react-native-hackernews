@@ -17,11 +17,11 @@ export const theme = {
   },
   fonts: {
     family: {
-      regular: 'NunitoSans-Regular',
-      light: 'NunitoSans-Light',
-      medium: 'NunitoSans-medium',
-      bold: 'NunitoSans-Bold',
-      semibold: 'NunitoSans-SemiBold',
+      regular: 'NotoSans-Regular',
+      light: 'NotoSans-Light',
+      medium: 'NotoSans-medium',
+      bold: 'NotoSans-Bold',
+      semibold: 'NotoSans-SemiBold',
     },
     fonSize: {
       xsmall: RFValue(10),

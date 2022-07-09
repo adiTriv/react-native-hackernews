@@ -10,15 +10,16 @@ import {useGetStories} from '../../custom-hooks/useGetStories';
 import {styles} from './styles';
 
 import {pprint} from '../../Utils';
+import { fetchStoryItems } from '../../API/stories';
 
 /**
- * Todo:  
- * design
- * Lazy loading
- * comments
+ * Todo:
+ * design - checked
+ * Lazy loading - asked
+ * comments -
  * full story
  * full comments
- * 
+ *
  * error handing
  * api call optimization
  */
@@ -28,8 +29,17 @@ const RenderStoryItem = ({item, index}) => {
     pprint({item});
   }
 
+  // Todo: recheck below implementation
   const getTimeAgo = time => {
     return moment(time).fromNow();
+  };
+
+  const handleCommentsPress = async () => {
+    let comments = null;
+
+    if (item?.kids && Array.isArray(item?.kids) && item.kids.length) {
+      comments = await fetchStoryItems(item.kids);
+    }
   };
 
   return (
@@ -38,28 +48,21 @@ const RenderStoryItem = ({item, index}) => {
         {item.title}
       </Text>
       <View style={styles.storyDetails}>
-        <Text style={styles.desc}>{`${item.score} point(s)`}</Text>
         <View style={styles.authorTime}>
-          <Text style={styles.desc}>{` by ${item.by}`}</Text>
-          <Text style={styles.desc}>{` ${getTimeAgo(
-            item.time,
-          )}`}</Text>
+          <Text style={styles.desc}>by</Text>
+          <Text style={[styles.desc, styles.author]}>{` ${item.by}`}</Text>
+          <Text style={styles.desc}>{` ${getTimeAgo(item.time)}`}</Text>
         </View>
+        <Text
+          style={[styles.desc, styles.score]}>{`${item.score} point(s)`}</Text>
         <TouchableOpacity
-          onPress={async () => {
-            if (item.kids) {
-              const comments = await Promise.all(
-                s.kids.map(async id => {
-                  const res = await fetch(
-                    `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
-                  );
-                  const comments = res.json();
-                  return comments;
-                }),
-              );
-            }
-          }}>
-          <Text style={[styles.desc, styles.comments]}>{` ${item.descendants} comment(s)`}</Text>
+          style={styles.commentsCont}
+          onPress={handleCommentsPress}>
+          <Text
+            style={[
+              styles.desc,
+              styles.comments,
+            ]}>{`${item.descendants} comment(s)`}</Text>
         </TouchableOpacity>
       </View>
     </View>
