@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { globalStyles } from '../../global/styles';
+import {globalStyles} from '../../global/styles';
 import {theme} from '../../global/Theme';
 
 export const styles = StyleSheet.create({
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
 
   title: {
     fontSize: theme.fonts.fonSize.semiLarge,
-    color: theme.fonts.color.accent
+    color: theme.fonts.color.accent,
   },
 
   storyDetails: {
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
 
   desc: {
     fontSize: theme.fonts.fonSize.semiRegular,
-    marginBottom: 10
+    marginBottom: 10,
   },
 
   score: {
@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: theme.colors.light.grey,
     paddingTop: 8,
-    marginTop: 10, 
+    marginTop: 10,
   },
 
   comments: {
@@ -55,6 +55,17 @@ export const styles = StyleSheet.create({
   },
 
   author: {
-    fontFamily: theme.fonts.family.semibold
+    fontFamily: theme.fonts.family.semibold,
+  },
+
+  noStoriesCont: {
+    flex: 1,
+    ...globalStyles.placeCenter,
+  },
+
+  noStoriesText: {
+    fontSize: theme.fonts.fonSize.semiLarge,
+    color: theme.fonts.color.danger,
+    textAlign: 'center',
   },
 });

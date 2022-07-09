@@ -38,6 +38,8 @@ export const theme = {
       dark: '#1B2430',
       grey: '#747f8f',
       accent: accent,
+
+      danger: "#EB1D36"
     },
   },
 };

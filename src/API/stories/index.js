@@ -1,13 +1,18 @@
 import constants from '../Constants';
 
-export const fetchStoryItems = async (ids) => {
+export const fetchStoryItems = async ids => {
   const storyItems = await Promise.all(
     ids.map(async id => {
       const res = await fetch(
         `${constants.apiConstants.BASE_URL}/item/${id}.json`,
       );
-      const item = res.json();
-      return item;
+
+      if (res.status === 200) {
+        const item = res.json();
+        return item;
+      }
+
+      return null;
     }),
   ).catch(err => pprint(err));
 
@@ -22,10 +27,14 @@ export const fetchTopStories = async () => {
       headers: {Accept: 'application/json', 'Content-type': 'application/json'},
     },
   );
-  const ids = await result.json();
-  const stories = await fetchStoryItems(ids);
 
-  return stories;
+  if (result.status === 200) {
+    const ids = await result.json();
+
+    const stories = await fetchStoryItems(ids);
+
+    return stories;
+  }
+
+  return [];
 };
-
-
