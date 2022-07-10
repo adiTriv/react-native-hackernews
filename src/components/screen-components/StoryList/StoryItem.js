@@ -1,25 +1,21 @@
-import React, { useCallback } from 'react';
+import React, {useCallback} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 
 import Text from '../../UI/Text';
 
 import {styles} from './styles';
 
-import {getTimeAgo} from '../../../Utils';
-import { fetchStoryItems } from '../../../API/stories';
+import {getTimeAgo, pprint} from '../../../Utils';
 
-const RenderStoryItem = ({item, index}) => {
+const RenderStoryItem = ({item, index, goToComments}) => {
   if (!item) {
     return null;
   }
 
-  const handleCommentsPress = useCallback(async item => {
-    let comments = null;
-
-    if (item?.kids && Array.isArray(item?.kids) && item.kids.length) {
-      comments = await fetchStoryItems(item.kids);
-    }
-  }, []);
+  const handleCommentsPress = useCallback(
+    () => goToComments(item.kids, item?.kids?.length),
+    [],
+  );
 
   const timeAgo = getTimeAgo(item.time);
 
@@ -43,7 +39,7 @@ const RenderStoryItem = ({item, index}) => {
             style={[
               styles.desc,
               styles.comments,
-            ]}>{`${item.descendants} comment(s)`}</Text>
+            ]}>{`${item?.kids?.length || 'no'} comment(s)`}</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -2,12 +2,11 @@ import {useState, useEffect} from 'react';
 
 import {fetchStoryItems} from '../../API/stories';
 
-export const useGetComments = (ids, page, setDataLoading) => {
+export const useGetComments = (page, setDataLoading, ids) => {
   const [comments, setComments] = useState(null);
 
   useEffect(() => {
     const getComments = async () => {
-
       if (ids && ids.length) {
         setDataLoading(true);
 

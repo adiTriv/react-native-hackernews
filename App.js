@@ -1,18 +1,16 @@
 import React from 'react';
-import {StatusBar} from 'react-native';
-import ErrorBoundary from './src/components/ErrorBoundary';
-import {theme} from './src/global/Theme';
+import {NavigationContainer} from '@react-navigation/native';
 
-import Stories from './src/Screens/Stories/Stories';
+import RootStack from './src/Navigation/Stack';
+
+import ErrorBoundary from './src/components/ErrorBoundary';
 
 export default function App() {
   return (
-    <ErrorBoundary>
-      <StatusBar
-        backgroundColor={theme.colors.light.theme}
-        barStyle={'dark-content'}
-      />
-      <Stories />
-    </ErrorBoundary>
+    <NavigationContainer>
+      <ErrorBoundary>
+        <RootStack />
+      </ErrorBoundary>
+    </NavigationContainer>
   );
 }

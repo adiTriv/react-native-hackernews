@@ -13,7 +13,9 @@ export const getSlicedArrByPageNo = (arr, page) => {
   const startIndex = page * 10;
   const endIndex = startIndex + 10;
 
-  console.log({startIndex, endIndex});
-
-  return arr.slice(startIndex, endIndex);
+  return [...arr].slice(startIndex, endIndex);
 }
+
+export const stripHtml = (str) => {
+  return str.replace(/<\/?[^>]+(>|$)/g, '');
+};

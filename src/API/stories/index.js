@@ -4,22 +4,26 @@ import constants from '../Constants';
 export const fetchStoryItems = async (ids, pageNo = 0) => {
   const arr = getSlicedArrByPageNo(ids, pageNo);
 
-  const storyItems = await Promise.all(
-    arr.map(async id => {
-      const res = await fetch(
-        `${constants.apiConstants.BASE_URL}/item/${id}.json`,
-      );
+  if (arr && arr.length) {
+    const storyItems = await Promise.all(
+      arr.map(async id => {
+        const res = await fetch(
+          `${constants.apiConstants.BASE_URL}/item/${id}.json`,
+        );
 
-      if (res.status === 200) {
-        const item = res.json();
-        return item;
-      }
+        if (res.status === 200) {
+          const item = res.json();
+          return item;
+        }
 
-      return null;
-    }),
-  );
+        return null;
+      }),
+    );
 
-  return storyItems;
+    return storyItems;
+  }
+
+  return [];
 };
 
 export const fetchTopStories = async () => {

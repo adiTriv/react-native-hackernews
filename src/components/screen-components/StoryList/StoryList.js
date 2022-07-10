@@ -28,16 +28,22 @@ const RenderListFooter = ({dataLength}) => {
       <View style={styles.listFooter}>
         <ActivityIndicator color={theme.colors.light.primary} size={'large'} />
       </View>
-    )
+    );
   }
-  return null
+  return null;
 };
 
-const StoryList = ({data, onEndReached}) => {
-  console.log('rendering stories', {len: data?.length});
+const StoryList = ({data, onEndReached, goToComments}) => {
+  console.log('rendering stories');
 
-  const RenderItem = useCallback(props => <RenderStoryItem {...props} />, []);
-  const RenderFooter = useCallback(() => <RenderListFooter dataLength={data?.length} />, []);
+  const RenderItem = useCallback(
+    props => <RenderStoryItem {...props} goToComments={goToComments} />,
+    [],
+  );
+  const RenderFooter = useCallback(
+    () => <RenderListFooter dataLength={data?.length} />,
+    [],
+  );
 
   return (
     <View style={styles.container}>
