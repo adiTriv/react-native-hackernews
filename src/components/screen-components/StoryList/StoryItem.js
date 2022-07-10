@@ -8,6 +8,7 @@ import {styles} from './styles';
 import {getTimeAgo, pprint} from '../../../Utils';
 
 const RenderStoryItem = ({item, index, goToComments}) => {
+  // if item is null return nothing
   if (!item) {
     return null;
   }
@@ -35,11 +36,9 @@ const RenderStoryItem = ({item, index, goToComments}) => {
         <TouchableOpacity
           style={styles.commentsCont}
           onPress={handleCommentsPress}>
-          <Text
-            style={[
-              styles.desc,
-              styles.comments,
-            ]}>{`${item?.kids?.length || 'no'} comment(s)`}</Text>
+          <Text style={[styles.desc, styles.comments]}>{`${
+            item?.kids?.length || 'no'
+          } comment(s)`}</Text>
         </TouchableOpacity>
       </View>
     </View>

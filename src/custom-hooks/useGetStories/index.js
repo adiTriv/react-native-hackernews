@@ -2,6 +2,15 @@ import {useState, useEffect} from 'react';
 
 import {fetchStoryItems, fetchTopStories} from '../../API/stories';
 
+/**
+ *
+ * @param {number} page
+ * @param {Function} setDataLoading
+ * @returns topStories
+ *
+ * Custom hook to get story data, by first fetching the story ids and then fetching each story by its id
+ */
+
 export const useGetStories = (page, setDataLoading) => {
   const [topStoriesIds, setTopStoriesIds] = useState(null);
   const [topStories, setTopStories] = useState(null);
@@ -18,7 +27,6 @@ export const useGetStories = (page, setDataLoading) => {
 
   useEffect(() => {
     const getStories = async () => {
-
       if (topStoriesIds && topStoriesIds.length) {
         setDataLoading(true);
 
