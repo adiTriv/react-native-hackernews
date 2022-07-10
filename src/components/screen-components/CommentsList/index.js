@@ -24,6 +24,7 @@ const RenderListEmpty = () => (
 );
 
 const RenderListFooter = ({dataLength, endOfList}) => {
+  // Only render loader if there is data or its not the end of list
   if (dataLength && !endOfList) {
     return (
       <View style={styles.listFooter}>

@@ -21,7 +21,8 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // Todo: log error to some error reporting service like - Sentry
+    // log error to some error reporting service like - Sentry
+    // but for the scope of this app this is not implemented
   }
 
   renderFallbackUI = () => {
@@ -48,12 +49,8 @@ class ErrorBoundary extends React.Component {
   render() {
     const RenderFallbackUI = this.renderFallbackUI;
 
-    console.log({hasError: this.state.hasError});
-
     if (this.state.hasError) {
-      // You can render any custom fallback UI
       return <RenderFallbackUI />;
-      // return <Text>Something is wrong</Text>;
     }
 
     return this.props.children;

@@ -11,6 +11,7 @@ import {theme} from '../../global/Theme';
 const Comments = ({route, navigation}) => {
   const {commentIds, numOfComments} = route.params;
 
+  // Paginated Comments List
   const PaginatedComments = useMemo(
     () =>
       WithPagination(
@@ -21,6 +22,7 @@ const Comments = ({route, navigation}) => {
     [commentIds],
   );
 
+  // to move back from comments screen
   const goBack = () => navigation.goBack();
 
   return (

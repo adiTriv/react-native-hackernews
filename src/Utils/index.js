@@ -8,6 +8,14 @@ export const getTimeAgo = time => {
   return moment(time).fromNow();
 };
 
+/**
+ * 
+ * @param {Array} arr 
+ * @param {Number} page 
+ * @returns 
+ * 
+ * Sliced (a portion ) of arr, based on the page number
+ */
 
 export const getSlicedArrByPageNo = (arr, page) => {
   const startIndex = page * 10;
@@ -16,6 +24,13 @@ export const getSlicedArrByPageNo = (arr, page) => {
   return [...arr].slice(startIndex, endIndex);
 }
 
+/**
+ * 
+ * @param {String} str 
+ * @returns 
+ * 
+ * HTML escaped string 
+ */
 export const stripHtml = (str) => {
   return str.replace(/<\/?[^>]+(>|$)/g, '');
 };
