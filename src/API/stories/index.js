@@ -1,4 +1,4 @@
-import {getSlicedArrByPageNo, pprint} from '../../Utils';
+import {getSlicedArrByPageNo} from '../../Utils';
 import constants from '../Constants';
 
 export const fetchStoryItems = async (ids, pageNo = 0) => {
@@ -17,7 +17,7 @@ export const fetchStoryItems = async (ids, pageNo = 0) => {
 
       return null;
     }),
-  ).catch(err => pprint(err));
+  );
 
   return storyItems;
 };

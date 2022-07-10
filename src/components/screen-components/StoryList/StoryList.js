@@ -22,27 +22,33 @@ const RenderListEmpty = () => (
   </View>
 );
 
-const RenderListFooter = () => (
-  <View style={styles.listFooter}>
-    <ActivityIndicator color={theme.colors.light.primary} size={'large'} />
-  </View>
-);
+const RenderListFooter = ({dataLength}) => {
+  if (dataLength) {
+    return (
+      <View style={styles.listFooter}>
+        <ActivityIndicator color={theme.colors.light.primary} size={'large'} />
+      </View>
+    )
+  }
+  return null
+};
 
-const StoryList = ({stories, onEndReached}) => {
+const StoryList = ({data, onEndReached}) => {
+  console.log('rendering stories', {len: data?.length});
+
   const RenderItem = useCallback(props => <RenderStoryItem {...props} />, []);
-
-  console.log('rendering stories', {len: stories?.length});
+  const RenderFooter = useCallback(() => <RenderListFooter dataLength={data?.length} />, []);
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={stories}
+        data={data}
         contentContainerStyle={styles.list}
         renderItem={RenderItem}
         keyExtractor={(item, index) => item?.id || index}
         ListHeaderComponent={RenderListHeader}
         ListEmptyComponent={RenderListEmpty}
-        ListFooterComponent={RenderListFooter}
+        ListFooterComponent={RenderFooter}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.1}
       />
