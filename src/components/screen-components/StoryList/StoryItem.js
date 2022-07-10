@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {View, TouchableOpacity} from 'react-native';
 
-import Text from '../../components/UI/Text';
+import Text from '../../UI/Text';
 
 import {styles} from './styles';
 
-import {getTimeAgo} from '../../Utils';
+import {getTimeAgo} from '../../../Utils';
+import { fetchStoryItems } from '../../../API/stories';
 
-const RenderStoryItem = ({item, index, handleCommentsPress}) => {
+const RenderStoryItem = ({item, index}) => {
   if (!item) {
     return null;
   }
+
+  const handleCommentsPress = useCallback(async item => {
+    let comments = null;
+
+    if (item?.kids && Array.isArray(item?.kids) && item.kids.length) {
+      comments = await fetchStoryItems(item.kids);
+    }
+  }, []);
 
   const timeAgo = getTimeAgo(item.time);
 

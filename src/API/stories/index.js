@@ -1,8 +1,11 @@
+import {getSlicedArrByPageNo, pprint} from '../../Utils';
 import constants from '../Constants';
 
-export const fetchStoryItems = async ids => {
+export const fetchStoryItems = async (ids, pageNo = 0) => {
+  const arr = getSlicedArrByPageNo(ids, pageNo);
+
   const storyItems = await Promise.all(
-    ids.map(async id => {
+    arr.map(async id => {
       const res = await fetch(
         `${constants.apiConstants.BASE_URL}/item/${id}.json`,
       );
@@ -31,9 +34,7 @@ export const fetchTopStories = async () => {
   if (result.status === 200) {
     const ids = await result.json();
 
-    const stories = await fetchStoryItems(ids);
-
-    return stories;
+    return ids;
   }
 
   return [];

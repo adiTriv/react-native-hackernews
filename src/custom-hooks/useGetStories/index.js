@@ -1,19 +1,41 @@
 import {useState, useEffect} from 'react';
 
-import {fetchTopStories} from '../../API/stories';
+import {fetchStoryItems, fetchTopStories} from '../../API/stories';
 
-export const useGetStories = () => {
+export const useGetStories = (page, setDataLoading) => {
+  const [topStoriesIds, setTopStoriesIds] = useState(null);
   const [topStories, setTopStories] = useState(null);
 
   useEffect(() => {
-    const getStories = async () => {
-      const stories = await fetchTopStories();
+    const getStoriesIds = async () => {
+      const storyIds = await fetchTopStories();
 
-      setTopStories(stories);
+      setTopStoriesIds(storyIds);
+    };
+
+    getStoriesIds();
+  }, []);
+
+  useEffect(() => {
+    const getStories = async () => {
+
+      if (topStoriesIds && topStoriesIds.length) {
+        setDataLoading(true);
+
+        const stories = await fetchStoryItems(topStoriesIds, page);
+
+        if (page === 0) {
+          setTopStories(stories);
+        } else {
+          setTopStories(oldStories => [...oldStories, ...stories]);
+        }
+
+        setDataLoading(false);
+      }
     };
 
     getStories();
-  }, []);
+  }, [page, topStoriesIds]);
 
   return topStories;
 };

@@ -1,11 +1,21 @@
-import {StyleSheet, ActivityIndicator, View, Modal} from 'react-native';
+import {
+  StyleSheet,
+  ActivityIndicator,
+  View,
+  Modal,
+  Dimensions,
+} from 'react-native';
 import React from 'react';
 import {theme} from '../../../../global/Theme';
 
-const FullPageLoader = ({visible, onClose}) => {
+const WIDTH = Dimensions.get('window').width * 0.3;
+
+const FullPageLoader = ({onClose}) => {
+  console.log('rendering loader');
+
   return (
     <View style={styles.cont}>
-      <Modal transparent={true} visible={visible} onDismiss={onClose}>
+      <Modal transparent={true} visible={true} onDismiss={onClose}>
         <View style={styles.loaderCont}>
           <View style={styles.loaderOuter}>
             <ActivityIndicator
@@ -19,7 +29,7 @@ const FullPageLoader = ({visible, onClose}) => {
   );
 };
 
-export default FullPageLoader;
+export default React.memo(FullPageLoader);
 
 const styles = StyleSheet.create({
   cont: {
@@ -32,8 +42,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#dde7f55e',
   },
   loaderOuter: {
-    width: '25%',
-    height: '12%',
+    width: WIDTH,
+    height: WIDTH,
     borderRadius: 100,
     backgroundColor: '#fff',
     alignItems: 'center',
